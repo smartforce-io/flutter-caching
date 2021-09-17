@@ -8,7 +8,7 @@ Next stage will be caching data into database (SQLite). Hopefully it will suppor
 
 To run program:
 - ```git clone https://github.com/smartforce-io/flutter-caching.git```
-- open flutter-caching folder in IDE
-- ```flutter pub get```
+- open "flutter-caching" folder in IDE
+- ```flutter pub get``` (to install all dependencies)
 - choose a device
-- run main.dart in debug mode
+- run "main.dart" in debug mode
