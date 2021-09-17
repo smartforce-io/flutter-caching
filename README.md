@@ -1,19 +1,14 @@
-# fetchingapp
+# flutter caching test
 
-A new Flutter project.
+This app shows how to cache data into File. 
 
-## Getting Started
+Only works for mobile devices (now web).
 
-This project is a starting point for a Flutter application.
+Next stage will be to cache data into database (SQLite).
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-# flutter-caching
-The Data Caching for Flutter App
+To run program:
+- ```git clone https://github.com/smartforce-io/flutter-caching.git```
+- ```cd flutter-caching```
+- ```flutter pub get```
+- choose a device
+- run debug mode
