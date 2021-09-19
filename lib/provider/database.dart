@@ -1,4 +1,5 @@
 import 'package:fetchingapp/model/data_model.dart';
+import 'package:fetchingapp/provider/sql_queries.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -6,14 +7,7 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> cacheDatabase() async {
   return openDatabase(join(await getDatabasesPath(), 'cache_database.db'),
       onCreate: (db, version) {
-    return db.execute('''
-    CREATE TABLE IF NOT EXISTS cache (
-      id INTEGER PRIMARY KEY,
-      name TEXT,
-      email TEXT,
-      body TEXT
-      );
-      ''');
+    return db.execute(Queries().createCacheTable);
   }, version: 1);
 }
 
@@ -44,12 +38,6 @@ Future cleanDB() async {
     return;
   }
   final db = await cacheDatabase();
-  db.execute('DROP TABLE cache');
-  db.execute('''
-    CREATE TABLE IF NOT EXISTS cache (
-      id INTEGER PRIMARY KEY,
-      name TEXT,
-      email TEXT,
-      body TEXT)
-      ''');
+  db.execute(Queries().dropCacheTable);
+  db.execute(Queries().createCacheTable);
 }
