@@ -34,6 +34,7 @@ class HomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 10),
           ElevatedButton(
             child: const Text(
               'Remove Cache File',
