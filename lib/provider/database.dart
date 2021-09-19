@@ -2,7 +2,6 @@ import 'package:fetchingapp/model/data_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-// import 'package:fetchingapp/model/data_model.dart';
 
 Future<Database> cacheDatabase() async {
   return openDatabase(join(await getDatabasesPath(), 'cache_database.db'),

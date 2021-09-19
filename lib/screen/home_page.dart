@@ -1,5 +1,3 @@
-// import 'package:fetchingapp/provider/api.dart';
-// import 'package:fetchingapp/provider/database.dart';
 import 'package:fetchingapp/provider/database.dart';
 import 'package:flutter/material.dart';
 import 'package:fetchingapp/screen/json_page.dart';

@@ -20,19 +20,7 @@ class _JsonPageState extends State<JsonPage> {
         future: ApiProvider().getData(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  CircularProgressIndicator(),
-                  Text(
-                    'Fetching from network',
-                    style: TextStyle(fontSize: 25),
-                  )
-                ],
-              ),
-            );
+            return const Center(child: CircularProgressIndicator());
           } else {
             // return Text('Data fetched successfully ${snapshot.data}');
             return ListView.builder(
