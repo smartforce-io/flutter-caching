@@ -1,6 +1,8 @@
-import 'package:fetchingapp/json_provider.dart';
+// import 'package:fetchingapp/provider/api.dart';
+// import 'package:fetchingapp/provider/database.dart';
+import 'package:fetchingapp/provider/database.dart';
 import 'package:flutter/material.dart';
-import 'package:fetchingapp/json_page.dart';
+import 'package:fetchingapp/screen/json_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
-            'Try getting Json data with and without Cache file.',
+            'Try getting Json data with and without Cache.',
             style: TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
           ),
@@ -37,11 +39,11 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           ElevatedButton(
             child: const Text(
-              'Remove Cache File',
+              'Clean DB',
               style: TextStyle(fontSize: 20),
             ),
             onPressed: () {
-              ApiProvider().removeCacheFile();
+              cleanDB();
             },
           ),
         ],

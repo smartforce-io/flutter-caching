@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fetchingapp/details_page.dart';
-import 'package:fetchingapp/json_provider.dart';
+import 'package:fetchingapp/screen/details_page.dart';
+import 'package:fetchingapp/provider/api.dart';
 
 class JsonPage extends StatefulWidget {
   const JsonPage({Key? key}) : super(key: key);
