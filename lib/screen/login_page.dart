@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-   Widget googleLoginButton() {
+  Widget googleLoginButton() {
     return OutlinedButton(
         style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseService().signOutFromGoogle();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login Screen'),

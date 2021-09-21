@@ -1,4 +1,6 @@
 import 'package:fetchingapp/provider/database.dart';
+import 'package:fetchingapp/provider/google_authentication.dart';
+import 'package:fetchingapp/screen/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fetchingapp/screen/json_page.dart';
@@ -12,10 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: ListTile(
-          title: Text(user.displayName.toString()),
-          subtitle: Text(user.email.toString()),
-        ),
+        title: const Text('Home Page'),
       ),
       body: Center(
           child: Column(
@@ -52,6 +51,22 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               cleanDB();
             },
+          ),
+          const SizedBox(height: 50),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.person),
+              title: Text(user.displayName.toString()),
+              subtitle: Text(user.email.toString()),
+              trailing: IconButton(
+                  onPressed: () {
+                    FirebaseService().signOutFromGoogle();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const LoginPage()));
+                  },
+                  icon: const Icon(Icons.logout)),
+            ),
+            elevation: 8,
           ),
         ],
       )),
