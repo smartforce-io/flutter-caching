@@ -1,9 +1,10 @@
 import 'package:fetchingapp/provider/database.dart';
 import 'package:fetchingapp/provider/google_authentication.dart';
+import 'package:fetchingapp/screen/firestore_page.dart';
 import 'package:fetchingapp/screen/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fetchingapp/screen/json_page.dart';
+import 'package:fetchingapp/screen/data_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage(this.user, {Key? key}) : super(key: key);
@@ -38,7 +39,8 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const JsonPage()),
+                MaterialPageRoute(
+                    builder: (context) => const FirestoreDataPage()),
               );
             },
           ),
