@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseService().signOutFromGoogle();
+    // FirebaseService().signOutFromGoogle();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login Screen'),

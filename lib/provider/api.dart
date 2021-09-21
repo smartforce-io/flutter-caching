@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:ffi';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fetchingapp/provider/database.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -11,6 +13,36 @@ class ApiProvider {
       return _getFromApi();
     }
     return _getFromDB();
+  }
+
+  Future getDataForFirestore() async {
+    return readCache().then((value) async {
+      if (value.isNotEmpty) {
+        print('READING FROM DB, NUMBER OF ENTRIES: ${value.length}');
+        callFirestore();
+        print('called firestore');
+
+        return value;
+      } else {
+        return callFirestore();
+
+        // return _getFromApi();
+      }
+    });
+  }
+
+  Future callFirestore() async {
+    cleanDB();
+    print('fetching from network');
+    var data = await FirebaseFirestore.instance
+        .collection('flutter-caching')
+        .orderBy('name')
+        .get();
+    var array = data.docs.map((e) {
+      return {'name': e['name']};
+    }).toList();
+    await addBatchOfFirestore(list: array);
+    return array;
   }
 
   Future _getFromDB() async {

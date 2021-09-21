@@ -14,8 +14,20 @@ Future<Database> cacheDatabase() async {
 //read data
 Future<List<Map>> readCache() async {
   final db = await cacheDatabase();
+  var cache = db.query('cache');
+  print('db entries: $cache');
 
-  return db.query('cache');
+  return cache;
+}
+
+Future addBatchOfFirestore({required List<Map<String, dynamic>> list}) async {
+  final db = await cacheDatabase();
+  final batch = db.batch();
+  for (var item in list) {
+    batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+  await batch.commit(noResult: true);
+  print('batch insert complete');
 }
 
 // add entry
