@@ -46,7 +46,7 @@ class _FutureFireStoreState extends State<FutureFireStore> {
                           final entry = (snapshot.data as dynamic)[index];
                           return ListTile(
                             title: Text(entry['name'].toString()),
-                            leading: Icon(Icons.plus_one),
+                            leading: Icon(Icons.data_usage),
                           );
                         });
                   }

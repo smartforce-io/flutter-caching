@@ -1,6 +1,6 @@
 import 'package:fetchingapp/provider/database.dart';
 import 'package:fetchingapp/provider/google_authentication.dart';
-import 'package:fetchingapp/screen/firestore_page.dart';
+import 'package:fetchingapp/screen/firestore_page_stream.dart';
 import 'package:fetchingapp/screen/firestore_page_future.dart';
 import 'package:fetchingapp/screen/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';

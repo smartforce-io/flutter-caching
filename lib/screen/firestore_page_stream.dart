@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fetchingapp/provider/database.dart';
 import 'package:flutter/material.dart';
 
-class FirestoreDataPage extends StatefulWidget {
-  const FirestoreDataPage({Key? key}) : super(key: key);
+class StreamFireStore extends StatefulWidget {
+  const StreamFireStore({Key? key}) : super(key: key);
 
   @override
-  _FirestoreDataPageState createState() => _FirestoreDataPageState();
+  _StreamFireStoreState createState() => _StreamFireStoreState();
 }
 
-class _FirestoreDataPageState extends State<FirestoreDataPage> {
+class _StreamFireStoreState extends State<StreamFireStore> {
   final textController = TextEditingController();
 
   void addEntry() {
