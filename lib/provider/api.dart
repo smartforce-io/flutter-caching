@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fetchingapp/provider/database.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +19,6 @@ class ApiProvider {
       if (value.isNotEmpty) {
         print('READING FROM DB, NUMBER OF ENTRIES: ${value.length}');
         callFirestore();
-        print('called firestore');
 
         return value;
       } else {
@@ -46,7 +44,7 @@ class ApiProvider {
   }
 
   Future _getFromDB() async {
-    return readCache().then((value) {
+    return readJsonCache().then((value) {
       if (value.isNotEmpty) {
         print('reading from db');
         return value;
@@ -67,7 +65,6 @@ class ApiProvider {
         // cache data
         if (!kIsWeb) {
           await cleanDB();
-          print('db cleaned');
           await addBatchOfEntries(entries: jsonDecoded);
         }
         return json.decode(body);

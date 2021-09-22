@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> cacheDatabase() async {
   return openDatabase(join(await getDatabasesPath(), 'cache_database.db'),
       onCreate: (db, version) {
-    return db.execute(Queries().createCacheTable);
+    return db.execute(Queries().createCacheTable + Queries().jsonCache);
   }, version: 1);
 }
 
@@ -15,7 +15,13 @@ Future<Database> cacheDatabase() async {
 Future<List<Map>> readCache() async {
   final db = await cacheDatabase();
   var cache = db.query('cache');
-  print('db entries: $cache');
+
+  return cache;
+}
+
+Future<List<Map>> readJsonCache() async {
+  final db = await cacheDatabase();
+  var cache = db.query('jsoncache');
 
   return cache;
 }
@@ -38,7 +44,7 @@ Future addBatchOfEntries({required List<dynamic> entries}) async {
     final entry =
         DataModel(name: item['name'], body: item['body'], email: item['email']);
 
-    batch.insert('cache', entry.toMap(),
+    batch.insert('jsoncache', entry.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
   await batch.commit(noResult: true);
@@ -51,5 +57,7 @@ Future cleanDB() async {
   }
   final db = await cacheDatabase();
   db.execute(Queries().dropCacheTable);
+  db.execute(Queries().dropJsonTable);
   db.execute(Queries().createCacheTable);
+  db.execute(Queries().jsonCache);
 }

@@ -10,6 +10,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
+    // FirebaseService().signOutFromGoogle();
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Login Screen'),
+      ),
+      body: Center(
+        child: googleLoginButton(context: context),
+      ),
+    );
+  }
+}
+
+Widget googleLoginButton({required BuildContext context}) {
   void click() async {
     await FirebaseService().signInwithGoogle().then((user) {
       Navigator.push(
@@ -17,38 +33,23 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  Widget googleLoginButton() {
-    return OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(45))),
-        onPressed: click,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Image(image: AssetImage('images/google_logo.png'), height: 35),
-              Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('Sign in with Google',
-                      style: TextStyle(color: Colors.grey, fontSize: 25)))
-            ],
-          ),
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // FirebaseService().signOutFromGoogle();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Screen'),
-      ),
-      body: Center(
-        child: googleLoginButton(),
-      ),
-    );
-  }
+  return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(45))),
+      onPressed: click,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Image(image: AssetImage('images/google_logo.png'), height: 35),
+            Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text('Sign in with Google',
+                    style: TextStyle(color: Colors.grey, fontSize: 25)))
+          ],
+        ),
+      ));
 }

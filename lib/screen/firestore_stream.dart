@@ -57,7 +57,6 @@ class _StreamFireStoreState extends State<StreamFireStore> {
                     // print(value);
                   });
 
-                  print('db: $db');
                   // readCache();
 
                   // print(data);

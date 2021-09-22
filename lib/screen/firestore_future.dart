@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fetchingapp/provider/api.dart';
-import 'package:fetchingapp/provider/database.dart';
 import 'package:flutter/material.dart';
 
 class FutureFireStore extends StatefulWidget {
@@ -46,7 +45,7 @@ class _FutureFireStoreState extends State<FutureFireStore> {
                           final entry = (snapshot.data as dynamic)[index];
                           return ListTile(
                             title: Text(entry['name'].toString()),
-                            leading: Icon(Icons.data_usage),
+                            leading: const Icon(Icons.data_usage),
                           );
                         });
                   }
