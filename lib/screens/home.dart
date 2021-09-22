@@ -1,14 +1,9 @@
 import 'package:fetchingapp/backend/database.dart';
-import 'package:fetchingapp/backend/firestore_changes.dart';
 import 'package:fetchingapp/backend/google_authentication.dart';
-import 'package:fetchingapp/screens/firestore_stream.dart';
-import 'package:fetchingapp/screens/firestore_future.dart';
-import 'package:fetchingapp/screens/json_caching.dart';
+import 'package:fetchingapp/screens/firestore_collection.dart';
 import 'package:fetchingapp/screens/login.dart';
-import 'package:fetchingapp/screens/provider_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage(this.user, {Key? key}) : super(key: key);
@@ -17,9 +12,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FirestoreChanges>(context, listen: false)
-        .listenOnFirestoreChanges();
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -27,65 +19,35 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 10),
           userProfileCard(context: context, user: user),
-          const SizedBox(height: 10),
-          testSectionButton(
-              context: context,
-              name: 'Simple Provider Test',
-              widget: const ProviderTestPage()),
-          const SizedBox(height: 10),
-          testSectionButton(
-              context: context,
-              name: 'Future Firestore',
-              widget: const FutureFireStore()),
-          const SizedBox(height: 10),
-          testSectionButton(
-              context: context,
-              name: 'Stream Firestore',
-              widget: const StreamFireStore()),
-          const SizedBox(height: 10),
-          cleanDBbutton(),
-          const SizedBox(height: 10),
-          testSectionButton(
-              context: context,
-              name: 'Old Json Caching Example',
-              widget: const JsonPage()),
-          const SizedBox(height: 10),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const FirestoreCollectionCaching()));
+              },
+              child: const Text(
+                'Firestore Collection',
+                style: TextStyle(fontSize: 25),
+              )),
+          ElevatedButton(
+              onPressed: () {
+                cleanDB();
+              },
+              child: const Text('Clean DB')),
+          ElevatedButton(
+              onPressed: () {
+                readCache();
+              },
+              child: const Text('Read Cache'))
         ],
       ),
     );
   }
-}
-
-Widget testSectionButton(
-    {required BuildContext context,
-    required String name,
-    required Widget widget}) {
-  return ElevatedButton(
-    child: Text(
-      name,
-      style: const TextStyle(fontSize: 20),
-    ),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => widget),
-      );
-    },
-  );
-}
-
-Widget cleanDBbutton() {
-  return ElevatedButton(
-    child: const Text(
-      'Clean DB',
-      style: TextStyle(fontSize: 20),
-    ),
-    onPressed: () {
-      cleanDB();
-    },
-  );
 }
 
 Widget userProfileCard({required BuildContext context, required User user}) {

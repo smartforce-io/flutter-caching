@@ -15,6 +15,9 @@ Future<Database> cacheDatabase() async {
 Future<List<Map>> readCache() async {
   final db = await cacheDatabase();
   var cache = db.query('cache');
+  cache.then((value) {
+    print(value);
+  });
 
   return cache;
 }
@@ -26,13 +29,24 @@ Future<List<Map>> readJsonCache() async {
   return cache;
 }
 
-Future addBatchOfFirestore({required List<Map<String, dynamic>> list}) async {
+Future insertSQLite({required Map<String, dynamic> item}) async {
   final db = await cacheDatabase();
-  final batch = db.batch();
-  for (var item in list) {
-    batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-  await batch.commit(noResult: true);
+  db.insert('cache', item);
+  // final batch = db.batch();
+  // for (var item in list) {
+  //   batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
+  // }
+  // await batch.commit(noResult: true);
+}
+
+Future updateSQLite({required Map<String, dynamic> item}) async {
+  final db = await cacheDatabase();
+  db.update('cache', item, where: 'doc_id = ?', whereArgs: [item['doc_id']]);
+  // final batch = db.batch();
+  // for (var item in list) {
+  //   batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
+  // }
+  // await batch.commit(noResult: true);
 }
 
 // add entry
@@ -58,4 +72,5 @@ Future cleanDB() async {
   db.execute(Queries().dropJsonTable);
   db.execute(Queries().createCacheTable);
   db.execute(Queries().jsonCache);
+  // readCache();
 }

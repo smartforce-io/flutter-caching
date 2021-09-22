@@ -2,7 +2,6 @@ import 'package:fetchingapp/backend/firestore_changes.dart';
 import 'package:fetchingapp/backend/notifications.dart';
 import 'package:fetchingapp/screens/home.dart';
 import 'package:fetchingapp/screens/login.dart';
-import 'package:fetchingapp/screens/provider_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +19,7 @@ Future<void> main() async {
   print('FCM token: $token');
 
   runApp(ChangeNotifierProvider(
-    create: (_) => Favorites(),
+    create: (_) => FirestoreChanges(),
     child: const MyApp(),
   ));
 }
@@ -51,16 +50,14 @@ class _MyAppState extends State<MyApp> {
       firstScreen = const LoginPage();
     }
 
-    
+    Provider.of<FirestoreChanges>(context, listen: false)
+        .listenOnFirestoreChanges();
 
-    return ChangeNotifierProvider(
-      create: (_) => FirestoreChanges(),
-      child: MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: firstScreen,
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: firstScreen,
     );
   }
 }

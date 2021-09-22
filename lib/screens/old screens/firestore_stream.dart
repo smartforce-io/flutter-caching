@@ -18,6 +18,7 @@ class _StreamFireStoreState extends State<StreamFireStore> {
       ),
       body: Column(
         children: [
+          
           Expanded(
             child: list(),
           ),
@@ -73,7 +74,7 @@ Widget list() {
           var data = snapshot.data!.docs.map((e) {
             return {'name': e['name']};
           }).toList();
-          addBatchOfFirestore(list: data);
+          // addToSQLite(list: data);
           return ListView(
             children: snapshot.data!.docs.map((e) {
               return ListTile(

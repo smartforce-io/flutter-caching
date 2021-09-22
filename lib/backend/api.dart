@@ -16,6 +16,7 @@ class ApiProvider {
 
   Future getDataForFirestore() async {
     return readCache().then((value) async {
+
       if (value.isNotEmpty) {
         print('READING FROM DB, NUMBER OF ENTRIES: ${value.length}');
         callFirestore();
@@ -36,7 +37,7 @@ class ApiProvider {
     var array = data.docs.map((e) {
       return {'name': e['name']};
     }).toList();
-    await addBatchOfFirestore(list: array);
+    // await insertSQLite(list: array);
     return array;
   }
 
@@ -73,3 +74,5 @@ class ApiProvider {
     }
   }
 }
+
+
