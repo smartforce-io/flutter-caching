@@ -1,3 +1,4 @@
+import 'package:fetchingapp/backend/firestore_changes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +23,18 @@ class _ProviderTestPageState extends State<ProviderTestPage> {
             const Button(fruit: 'Orange'),
             const Button(fruit: 'Banana'),
             Text(
-              'My favorite fruit is: ' + Provider.of<Favorites>(context).fruit,
+              'My favorite fruit is: ' +
+                  Provider.of<Favorites>(context).fruit +
+                  '\n\n',
               style: const TextStyle(fontSize: 25),
+            ),
+            const Text(
+              'Firestore Listener Provider:',
+              style: TextStyle(fontSize: 25),
+            ),
+            Text(
+              '\n' + Provider.of<FirestoreChanges>(context).changeStr,
+              style: const TextStyle(fontSize: 15),
             )
           ],
         ),

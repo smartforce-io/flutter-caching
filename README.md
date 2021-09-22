@@ -8,5 +8,5 @@ This app is used to test the following features:
 - ```Clean DB``` - removes all tables from SQLite database and creates them again;
 - ```Old Json Caching Example``` - fetching data from REST API and caching into SQLite;
 
-- Firebase notifications are also enabled. FCM token is shown in debug console at startup. Copy the token and go to "Cloud messaging" in Firebase console to test in out.
+- Firebase notifications are also enabled. FCM token is shown in debug console at startup. Copy the token and go to "Cloud messaging" in Firebase console to test it out.
 

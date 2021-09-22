@@ -1,4 +1,5 @@
 import 'package:fetchingapp/backend/database.dart';
+import 'package:fetchingapp/backend/firestore_changes.dart';
 import 'package:fetchingapp/backend/google_authentication.dart';
 import 'package:fetchingapp/screens/firestore_stream.dart';
 import 'package:fetchingapp/screens/firestore_future.dart';
@@ -7,6 +8,7 @@ import 'package:fetchingapp/screens/login.dart';
 import 'package:fetchingapp/screens/provider_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage(this.user, {Key? key}) : super(key: key);
@@ -15,6 +17,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<FirestoreChanges>(context, listen: false)
+        .listenOnFirestoreChanges();
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -27,7 +32,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           testSectionButton(
               context: context,
-              name: 'Provider Test',
+              name: 'Simple Provider Test',
               widget: const ProviderTestPage()),
           const SizedBox(height: 10),
           testSectionButton(
