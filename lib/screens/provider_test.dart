@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProviderTestPage extends StatefulWidget {
   const ProviderTestPage({Key? key}) : super(key: key);
@@ -17,13 +18,26 @@ class _ProviderTestPageState extends State<ProviderTestPage> {
       body: Center(
         child: Column(
           children: [
-            Button(fruit: 'Apple'),
-            Button(fruit: 'Orange'),
-            Button(fruit: 'Banana')
+            const Button(fruit: 'Apple'),
+            const Button(fruit: 'Orange'),
+            const Button(fruit: 'Banana'),
+            Text(
+              'My favorite fruit is: ' + Provider.of<Favorites>(context).fruit,
+              style: const TextStyle(fontSize: 25),
+            )
           ],
         ),
       ),
     );
+  }
+}
+
+class Favorites extends ChangeNotifier {
+  String fruit = 'unknown';
+
+  void changeFruit(String newFruit) {
+    fruit = newFruit;
+    notifyListeners();
   }
 }
 
@@ -33,6 +47,10 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: () {}, child: Text(fruit));
+    return ElevatedButton(
+        onPressed: () {
+          Provider.of<Favorites>(context, listen: false).changeFruit(fruit);
+        },
+        child: Text(fruit, style: const TextStyle(fontSize: 20)));
   }
 }

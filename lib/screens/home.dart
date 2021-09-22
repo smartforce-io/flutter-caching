@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
           testSectionButton(
               context: context,
               name: 'Provider Test',
-              widget: ProviderTestPage()),
+              widget: const ProviderTestPage()),
           const SizedBox(height: 10),
           testSectionButton(
               context: context,

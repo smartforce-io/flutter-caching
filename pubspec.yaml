@@ -43,6 +43,9 @@ dependencies:
   cloud_firestore:
   google_sign_in:
   firebase_auth:
+  provider: ^6.0.0
+  firebase_messaging: ^10.0.7
+  flutter_local_notifications: ^8.2.0
 
 
 dev_dependencies:
