@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fetchingapp/provider/database.dart';
+import 'package:fetchingapp/backend/database.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -19,12 +19,9 @@ class ApiProvider {
       if (value.isNotEmpty) {
         print('READING FROM DB, NUMBER OF ENTRIES: ${value.length}');
         callFirestore();
-
         return value;
       } else {
         return callFirestore();
-
-        // return _getFromApi();
       }
     });
   }
@@ -72,7 +69,7 @@ class ApiProvider {
         return json.decode(req.body);
       }
     } catch (e) {
-      // ginore
+      // ignore
     }
   }
 }

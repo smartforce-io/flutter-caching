@@ -20,7 +20,3 @@ class Queries {
   String dropCacheTable = 'DROP TABLE cache';
   String dropJsonTable = 'DROP TABLE jsoncache';
 }
-
-void main() {
-  print(Queries().createCacheTable + Queries().jsonCache);
-}

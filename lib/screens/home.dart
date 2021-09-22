@@ -1,9 +1,10 @@
-import 'package:fetchingapp/provider/database.dart';
-import 'package:fetchingapp/provider/google_authentication.dart';
-import 'package:fetchingapp/screen/firestore_stream.dart';
-import 'package:fetchingapp/screen/firestore_future.dart';
-import 'package:fetchingapp/screen/json_caching.dart';
-import 'package:fetchingapp/screen/login_page.dart';
+import 'package:fetchingapp/backend/database.dart';
+import 'package:fetchingapp/backend/google_authentication.dart';
+import 'package:fetchingapp/screens/firestore_stream.dart';
+import 'package:fetchingapp/screens/firestore_future.dart';
+import 'package:fetchingapp/screens/json_caching.dart';
+import 'package:fetchingapp/screens/login.dart';
+import 'package:fetchingapp/screens/provider_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,19 +18,18 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Home Page'),
+        title: const Text('Home Screen'),
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
         children: [
-          const Text(
-            'Try getting Firebase data with and without Cache.',
-            style: TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 10),
+          userProfileCard(context: context, user: user),
+          const SizedBox(height: 10),
+          testSectionButton(
+              context: context,
+              name: 'Provider Test',
+              widget: ProviderTestPage()),
+          const SizedBox(height: 10),
           testSectionButton(
               context: context,
               name: 'Future Firestore',
@@ -46,10 +46,9 @@ class HomePage extends StatelessWidget {
               context: context,
               name: 'Old Json Caching Example',
               widget: const JsonPage()),
-          const SizedBox(height: 50),
-          userProfileCard(context: context, user: user)
+          const SizedBox(height: 10),
         ],
-      )),
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:fetchingapp/model/data_model.dart';
-import 'package:fetchingapp/provider/sql_queries.dart';
+import 'package:fetchingapp/backend/sql_queries.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -33,7 +33,6 @@ Future addBatchOfFirestore({required List<Map<String, dynamic>> list}) async {
     batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
   }
   await batch.commit(noResult: true);
-  print('batch insert complete');
 }
 
 // add entry
@@ -48,7 +47,6 @@ Future addBatchOfEntries({required List<dynamic> entries}) async {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
   await batch.commit(noResult: true);
-  print('batch insert complete');
 }
 
 Future cleanDB() async {

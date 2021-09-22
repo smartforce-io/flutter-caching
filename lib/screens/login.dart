@@ -1,5 +1,5 @@
-import 'package:fetchingapp/provider/google_authentication.dart';
-import 'package:fetchingapp/screen/home_page.dart';
+import 'package:fetchingapp/backend/google_authentication.dart';
+import 'package:fetchingapp/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
