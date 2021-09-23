@@ -34,11 +34,11 @@ class HomePage extends StatelessWidget {
                 'Firestore Collection',
                 style: TextStyle(fontSize: 25),
               )),
-          ElevatedButton(
-              onPressed: () {
-                readCache();
-              },
-              child: const Text('Read Cache'))
+          // ElevatedButton(
+          //     onPressed: () {
+          //       readCache();
+          //     },
+          //     child: const Text('Read Cache'))
         ],
       ),
     );

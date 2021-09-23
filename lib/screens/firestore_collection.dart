@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fetchingapp/backend/database.dart';
+import 'package:fetchingapp/backend/firestore_listener.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FirestoreCollectionCaching extends StatefulWidget {
   const FirestoreCollectionCaching({Key? key}) : super(key: key);
@@ -19,8 +22,8 @@ class _FirestoreCollectionCachingState
       ),
       body: Column(
         children: [
-          Expanded(
-            child: list(),
+          const Expanded(
+            child: DocList(),
           ),
           inputfield(),
         ],
@@ -29,17 +32,75 @@ class _FirestoreCollectionCachingState
   }
 }
 
-Widget list() {
-  return Text('list');
+removeDocFromFirebase(String doc) async {
+  await FirebaseFirestore.instance
+      .collection('flutter-caching')
+      .doc(doc)
+      .delete();
+}
+
+editDocInFirebase(String value, String doc) async {
+  await FirebaseFirestore.instance
+      .collection('flutter-caching')
+      .doc(doc)
+      .update({'name': value});
+}
+
+class DocList extends StatefulWidget {
+  const DocList({Key? key}) : super(key: key);
+
+  @override
+  _DocListState createState() => _DocListState();
+}
+
+class _DocListState extends State<DocList> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: FutureBuilder(
+        future: Provider.of<FirestoreChanges>(context).readSQLiteCache(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            // return Text(snapshot.data.toString());
+            return ListView.builder(
+                itemCount: (snapshot.data as dynamic).length,
+                itemBuilder: (context, index) {
+                  final entry = (snapshot.data as dynamic)[index];
+                  final TextEditingController _controller =
+                      TextEditingController(text: entry['name'].toString());
+                  return ListTile(
+                    title: TextField(
+                      
+                      onEditingComplete: (){
+                        FocusScope.of(context).unfocus();
+                          editDocInFirebase(_controller.text, entry['doc_id']);
+                      },
+                      controller: _controller,
+                    ),
+                    subtitle: Text('Doc ID: ${entry['doc_id'].toString()}'),
+                    trailing: IconButton(
+                        onPressed: () {
+                          removeDocFromFirebase(entry['doc_id']);
+                        },
+                        icon: const Icon(Icons.delete)),
+                  );
+                });
+          }
+        },
+      ),
+    );
+  }
 }
 
 Widget inputfield() {
   final textController = TextEditingController();
 
   void addDocToFirebase() {
-    if (textController.text == '') {
-      return;
-    }
+    // if (textController.text == '') {
+    //   return;
+    // }
 
     FirebaseFirestore.instance
         .collection('flutter-caching')
@@ -64,3 +125,35 @@ Widget inputfield() {
             },
           )));
 }
+
+
+
+// Widget list({required BuildContext context}) {
+//   return Center(
+//     child: FutureBuilder(
+//       future: Provider.of<FirestoreChanges>(context).readSQLiteCache(),
+//       builder: (context, snapshot) {
+//         if (!snapshot.hasData) {
+//           return const Center(child: CircularProgressIndicator());
+//         } else {
+//           // return Text(snapshot.data.toString());
+//           return ListView.builder(
+//               itemCount: (snapshot.data as dynamic).length,
+//               itemBuilder: (context, index) {
+//                 final entry = (snapshot.data as dynamic)[index];
+//                 return ListTile(
+//                   title: Text(entry['name'].toString()),
+//                   subtitle: Text('Doc ID: ${entry['doc_id'].toString()}'),
+//                   leading: const Icon(Icons.data_usage),
+//                   trailing: IconButton(
+//                       onPressed: () {
+//                         removeDocFromFirebase(entry['doc_id']);
+//                       },
+//                       icon: const Icon(Icons.delete)),
+//                 );
+//               });
+//         }
+//       },
+//     ),
+//   );
+// }
