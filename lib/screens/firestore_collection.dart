@@ -124,34 +124,3 @@ editDocInFirebase(String value, String doc) async {
       .doc(doc)
       .update({'name': value});
 }
-
-
-// Widget list({required BuildContext context}) {
-//   return Center(
-//     child: FutureBuilder(
-//       future: Provider.of<FirestoreChanges>(context).readSQLiteCache(),
-//       builder: (context, snapshot) {
-//         if (!snapshot.hasData) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else {
-//           // return Text(snapshot.data.toString());
-//           return ListView.builder(
-//               itemCount: (snapshot.data as dynamic).length,
-//               itemBuilder: (context, index) {
-//                 final entry = (snapshot.data as dynamic)[index];
-//                 return ListTile(
-//                   title: Text(entry['name'].toString()),
-//                   subtitle: Text('Doc ID: ${entry['doc_id'].toString()}'),
-//                   leading: const Icon(Icons.data_usage),
-//                   trailing: IconButton(
-//                       onPressed: () {
-//                         removeDocFromFirebase(entry['doc_id']);
-//                       },
-//                       icon: const Icon(Icons.delete)),
-//                 );
-//               });
-//         }
-//       },
-//     ),
-//   );
-// }
