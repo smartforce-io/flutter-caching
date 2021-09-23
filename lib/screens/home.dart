@@ -1,4 +1,3 @@
-import 'package:fetchingapp/backend/database.dart';
 import 'package:fetchingapp/backend/google_authentication.dart';
 import 'package:fetchingapp/screens/firestore_collection.dart';
 import 'package:fetchingapp/screens/login.dart';
@@ -34,11 +33,6 @@ class HomePage extends StatelessWidget {
                 'Firestore Collection',
                 style: TextStyle(fontSize: 25),
               )),
-          // ElevatedButton(
-          //     onPressed: () {
-          //       readCache();
-          //     },
-          //     child: const Text('Read Cache'))
         ],
       ),
     );

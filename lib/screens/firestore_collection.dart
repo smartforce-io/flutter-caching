@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fetchingapp/backend/database.dart';
 import 'package:fetchingapp/backend/firestore_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,20 +29,6 @@ class _FirestoreCollectionCachingState
       ),
     );
   }
-}
-
-removeDocFromFirebase(String doc) async {
-  await FirebaseFirestore.instance
-      .collection('flutter-caching')
-      .doc(doc)
-      .delete();
-}
-
-editDocInFirebase(String value, String doc) async {
-  await FirebaseFirestore.instance
-      .collection('flutter-caching')
-      .doc(doc)
-      .update({'name': value});
 }
 
 class DocList extends StatefulWidget {
@@ -97,7 +82,7 @@ class _DocListState extends State<DocList> {
 Widget inputfield() {
   final textController = TextEditingController();
 
-  void addDocToFirebase() {
+  addDocToFirebase() {
     // if (textController.text == '') {
     //   return;
     // }
@@ -126,6 +111,19 @@ Widget inputfield() {
           )));
 }
 
+removeDocFromFirebase(String doc) async {
+  await FirebaseFirestore.instance
+      .collection('flutter-caching')
+      .doc(doc)
+      .delete();
+}
+
+editDocInFirebase(String value, String doc) async {
+  await FirebaseFirestore.instance
+      .collection('flutter-caching')
+      .doc(doc)
+      .update({'name': value});
+}
 
 
 // Widget list({required BuildContext context}) {
