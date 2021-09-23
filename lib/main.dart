@@ -1,4 +1,4 @@
-import 'package:fetchingapp/backend/firestore_changes.dart';
+import 'package:fetchingapp/backend/firestore_listener.dart';
 import 'package:fetchingapp/backend/notifications.dart';
 import 'package:fetchingapp/screens/home.dart';
 import 'package:fetchingapp/screens/login.dart';

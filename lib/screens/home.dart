@@ -36,11 +36,6 @@ class HomePage extends StatelessWidget {
               )),
           ElevatedButton(
               onPressed: () {
-                cleanDB();
-              },
-              child: const Text('Clean DB')),
-          ElevatedButton(
-              onPressed: () {
                 readCache();
               },
               child: const Text('Read Cache'))

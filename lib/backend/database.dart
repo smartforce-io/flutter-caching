@@ -39,6 +39,16 @@ Future insertSQLite({required Map<String, dynamic> item}) async {
   // await batch.commit(noResult: true);
 }
 
+Future insertBatchSQLite({required List<Map<String, dynamic>> list}) async {
+  final db = await cacheDatabase();
+  // db.insert('cache', item);
+  final batch = db.batch();
+  for (var item in list) {
+    batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+  await batch.commit(noResult: true);
+}
+
 Future updateSQLite({required Map<String, dynamic> item}) async {
   final db = await cacheDatabase();
   db.update('cache', item, where: 'doc_id = ?', whereArgs: [item['doc_id']]);
@@ -47,6 +57,11 @@ Future updateSQLite({required Map<String, dynamic> item}) async {
   //   batch.insert('cache', item, conflictAlgorithm: ConflictAlgorithm.replace);
   // }
   // await batch.commit(noResult: true);
+}
+
+Future deleteSQLite({required Map<String, dynamic> item}) async {
+  final db = await cacheDatabase();
+  db.delete('cache', where: 'doc_id = ?', whereArgs: [item['doc_id']]);
 }
 
 // add entry

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fetchingapp/backend/database.dart';
 import 'package:flutter/material.dart';
 
 class FirestoreCollectionCaching extends StatefulWidget {
@@ -14,9 +13,6 @@ class _FirestoreCollectionCachingState
     extends State<FirestoreCollectionCaching> {
   @override
   Widget build(BuildContext context) {
-    readCache();
-    cleanDB();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Firestore Collection'),
@@ -24,7 +20,7 @@ class _FirestoreCollectionCachingState
       body: Column(
         children: [
           Expanded(
-            child: Text('List'),
+            child: list(),
           ),
           inputfield(),
         ],
@@ -33,10 +29,14 @@ class _FirestoreCollectionCachingState
   }
 }
 
+Widget list() {
+  return Text('list');
+}
+
 Widget inputfield() {
   final textController = TextEditingController();
 
-  void addEntry() {
+  void addDocToFirebase() {
     if (textController.text == '') {
       return;
     }
@@ -50,7 +50,7 @@ Widget inputfield() {
   return TextField(
       controller: textController,
       onEditingComplete: () {
-        addEntry();
+        addDocToFirebase();
       },
       decoration: InputDecoration(
           prefixIcon: const Icon(Icons.add_circle),
@@ -60,7 +60,7 @@ Widget inputfield() {
             splashColor: Colors.blue,
             tooltip: "Post message",
             onPressed: () {
-              addEntry();
+              addDocToFirebase();
             },
           )));
 }

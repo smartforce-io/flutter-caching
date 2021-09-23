@@ -1,4 +1,4 @@
-import 'package:fetchingapp/backend/firestore_changes.dart';
+import 'package:fetchingapp/backend/firestore_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,9 @@ class _ProviderTestPageState extends State<ProviderTestPage> {
               style: TextStyle(fontSize: 25),
             ),
             Text(
-              '\n' + Provider.of<FirestoreChanges>(context).changeStr,
+              '\n'
+              // + Provider.of<FirestoreChanges>(context).changeStr,
+              ,
               style: const TextStyle(fontSize: 15),
             )
           ],
